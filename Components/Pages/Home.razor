@@ -1,0 +1,80 @@
+@page "/"
+@rendermode InteractiveServer
+@using BlazorDbzPersonagem.Models
+@inject IHttpClientFactory HttpClientFactory
+
+<PageTitle>Dragon Ball - Personagem</PageTitle>
+
+<h1>Informações do Personagem</h1>
+
+<div class="mb-3 d-flex gap-2 align-items-center">
+    <label for="idPersonagem">ID do personagem:</label>
+    <input id="idPersonagem" type="number" min="1" class="form-control w-auto" @bind="idPersonagem" />
+    <button class="btn btn-primary" @onclick="BuscarPersonagem" disabled="@carregando">
+        @(carregando ? "Buscando..." : "Buscar")
+    </button>
+</div>
+
+@if (!string.IsNullOrEmpty(erro))
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+@if (personagem is not null)
+{
+    <p><strong>Nome:</strong> @personagem.Nome</p>
+    <p><strong>Planeta de Origem:</strong> @(personagem.Planeta?.Nome ?? "Desconhecido")</p>
+
+    <h3>Transformações:</h3>
+
+    @if (personagem.Transformacoes.Any())
+    {
+        <ul>
+            @foreach (var t in personagem.Transformacoes)
+            {
+                <li>@t.Nome</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Este personagem não possui transformações.</p>
+    }
+}
+
+@code {
+    private int idPersonagem = 1;
+    private Personagem? personagem;
+    private string? erro;
+    private bool carregando;
+
+    private async Task BuscarPersonagem()
+    {
+        erro = null;
+        personagem = null;
+        carregando = true;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient();
+            var resposta = await client.GetAsync($"https://dragonball-api.com/api/characters/{idPersonagem}");
+
+            if (resposta.IsSuccessStatusCode)
+            {
+                personagem = await resposta.Content.ReadFromJsonAsync<Personagem>();
+            }
+            else
+            {
+                erro = $"Personagem não encontrado (código {(int)resposta.StatusCode}).";
+            }
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao consultar a API: {ex.Message}";
+        }
+        finally
+        {
+            carregando = false;
+        }
+    }
+}
