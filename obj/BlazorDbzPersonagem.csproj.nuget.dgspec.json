@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj": {}
+    "C:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj": {}
   },
   "projects": {
-    "c:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj": {
+    "C:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj",
+        "projectUniqueName": "C:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj",
         "projectName": "BlazorDbzPersonagem",
-        "projectPath": "c:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj",
+        "projectPath": "C:\\BlazorDbzPersonagem\\BlazorDbzPersonagem.csproj",
         "packagesPath": "C:\\Users\\kaioe\\.nuget\\packages\\",
-        "outputPath": "c:\\BlazorDbzPersonagem\\obj\\",
+        "outputPath": "C:\\BlazorDbzPersonagem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kaioe\\AppData\\Roaming\\NuGet\\NuGet.Config"
